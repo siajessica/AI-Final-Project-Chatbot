@@ -9,7 +9,6 @@ import string
 import json
 
 #NLP packets
-!pip install -q wordcloud
 import wordcloud
 
 import nltk
