@@ -37,17 +37,14 @@ def rm_punctuation(str):
       new_str = new_str + x
   return new_str
 
-def generate_greeting_respond(greeting):
-  if rm_punctuation(greeting.lower()) in greeting_input:
-    return random.choice(greeting_responses)
-
 flag = True
 print("Hi! I am Sarcov. Ask me any questions about COVID-19 in Taiwan: ")
 while flag:
   user_input = input().lower()
   user_input = rm_punctuation(user_input)
   if user_input != 'bye':
-    continue
+    if user_input in greeting:
+      print('Sarcov: ' + random.choice(greeting_responses))
   else:
     flag = False
     print('Sarcov: Bye, take care, remember to wear a mask and stay safe!')
