@@ -29,7 +29,7 @@ greeting_input = json.loads(open('greetings_start.txt', 'r').read())
 greeting_responses = json.loads(open('greetings_responses.txt', 'r').read())
 
 def rm_punctuation(str):
-      punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+  punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
   new_str = ''
   for x in str:
     if x not in punctuations:
