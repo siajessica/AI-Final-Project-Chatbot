@@ -42,7 +42,7 @@ while flag:
   user_input = input().lower()
   user_input = rm_punctuation(user_input)
   if user_input != 'bye':
-    if user_input in greeting:
+    if user_input in greeting_input:
       print('Sarcov: ' + random.choice(greeting_responses))
   else:
     flag = False
