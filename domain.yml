@@ -8,14 +8,13 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
-  - get_diagnosis
-
-actions:
-  - action_diagnose
+  - say_hello
+  - close_contact_p2p
+  - close_contact_sms
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Hey! Do you have any questions about COVID-19 quarantine guidelines?"
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -33,6 +32,23 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
+  utter_what:
+  - text: "What questions do you have?"
+
+  utter_met:
+  - text: "Did you meet the person in the past 14 days?"
+
+  utter_vacc:
+  - text: "Have you received your third dose of the COVID vaccine?"
+
+  utter_3vacc_guidelines:
+  - text: "As of 16th May of 2022, individuals who have got three doses can be exempted from home isolation, but instead should undergo a seven-day self-initiated epidemic prevention. During this seven-day period, self-initiated measures should be observed, and proof of a negative result from an at-home rapid test taken within two days should be presented if they need to go out to work or buy daily necessities; resting at home and taking a rapid test are advised if symptoms appear."
+
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+actions:
+  - action_hello_world
+  - action_guidelines

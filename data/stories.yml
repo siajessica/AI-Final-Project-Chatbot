@@ -29,9 +29,29 @@ stories:
   - intent: deny
   - action: utter_goodbye
 
-- story: diagnosis
+## yes
+- story: covid_1
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: get_diagnosis
-  - action: action_diagnose
+  - intent: affirm
+  - action: utter_what
+  - intent: close_contact_p2p
+  - action: utter_met
+  - intent: affirm
+  - action: utter_vacc
+  - intent: affirm
+  - action: utter_3vacc_guidelines
+
+
+- story: covid_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+
+
+- story: covid
+  steps:
+  - intent: say_hello
+  - action: action_hello_world

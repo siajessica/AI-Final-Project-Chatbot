@@ -30,6 +30,7 @@ nlu:
     - bye bye
     - see you later
 
+# isa tambah
 - intent: affirm
   examples: |
     - yes
@@ -90,7 +91,13 @@ nlu:
     - am I talking to a bot?
     - am I talking to a human?
 
-- intent: get_diagnosis
+- intent: close_contact_p2p
   examples: |
-    - did I get covid?
-    - I am sick
+    - my [friend](people) got covid
+    - my [brother](people) got diagnosed with COVID-19
+    - my [sister](people) was tested positive
+
+- intent: close_contact_sms
+  examples: |
+    - I got [notified](people) from the APP
+
