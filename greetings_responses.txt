@@ -1,1 +1,0 @@
-["Hi! How can I help you?", "Hey there! So what do you want to know?"]
