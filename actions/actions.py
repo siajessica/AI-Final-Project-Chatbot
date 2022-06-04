@@ -8,10 +8,16 @@
 # This is a simple example for a custom action which utters "Hello World!"
 
 from typing import Any, Text, Dict, List
+from bert import question_answer
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
+import torch
+from transformers import BertForQuestionAnswering
+from transformers import BertTokenizer
+
+from pathlib import Path
 
 class ActionHelloWorld(Action):
 
@@ -22,6 +28,8 @@ class ActionHelloWorld(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text="Hello World!")
+        text = Path('./corpus/test_corp.txt').read_text()
+        ans = question_answer("What are the symptoms for covid?", text)
+        dispatcher.utter_message(text=ans)
 
         return []
