@@ -51,4 +51,3 @@ session_config:
 
 actions:
   - action_hello_world
-  - action_guidelines

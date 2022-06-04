@@ -5,10 +5,10 @@ import torch
 from transformers import BertForQuestionAnswering
 from transformers import BertTokenizer
 
-model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
-tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
-
 def question_answer(question, text):
+    model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+    tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+
     input_ids = tokenizer.encode(question, text) #tokenize question and text in ids as a pair
     tokens = tokenizer.convert_ids_to_tokens(input_ids) #string version of tokenized ids
     
@@ -36,26 +36,5 @@ def question_answer(question, text):
     if answer.startswith("[CLS]"):
         answer = "Unable to find the answer to your question."
     
-    print("\nAnswer:\n{}".format(answer.capitalize()))
-
-text = input("Please enter your text: \n")
-question = input("\nPlease enter your question: \n")
-
-while True:
-    question_answer(question, text)
-    
-    flag = True
-    flag_N = False
-    
-    while flag:
-        response = input("\nDo you want to ask another question based on this text (Y/N)? ")
-        if response[0] == "Y":
-            question = input("\nPlease enter your question: \n")
-            flag = False
-        elif response[0] == "N":
-            print("\nBye!")
-            flag = False
-            flag_N = True
-            
-    if flag_N == True:
-        break
+    return format(answer.capitalize())
+    #print("\nAnswer:\n{}".format(answer.capitalize()))
