@@ -29,7 +29,8 @@ class ActionHelloWorld(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         text = Path('./corpus/test_corp.txt').read_text()
-        ans = question_answer("What are the symptoms for covid?", text)
+        question = tracker.latest_message.get('text')
+        ans = question_answer(question, text)
         dispatcher.utter_message(text=ans)
 
         return []
