@@ -101,3 +101,7 @@ nlu:
   examples: |
     - I got [notified](people) from the APP
 
+- intent: say_hello
+  examples: |
+    - hello covid
+

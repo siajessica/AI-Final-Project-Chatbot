@@ -8,10 +8,16 @@
 # This is a simple example for a custom action which utters "Hello World!"
 
 from typing import Any, Text, Dict, List
+import pandas as pd
+import numpy as np
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from bert import question_answer
 
+    
+model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
 
 class ActionHelloWorld(Action):
 
@@ -22,6 +28,7 @@ class ActionHelloWorld(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        question_answer("What is Covid?", "Covid says hello.")
         dispatcher.utter_message(text="Hello World!")
 
         return []

@@ -5,10 +5,12 @@ import torch
 from transformers import BertForQuestionAnswering
 from transformers import BertTokenizer
 
+    
 model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
 tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
 
 def question_answer(question, text):
+
     input_ids = tokenizer.encode(question, text) #tokenize question and text in ids as a pair
     tokens = tokenizer.convert_ids_to_tokens(input_ids) #string version of tokenized ids
     
