@@ -12,6 +12,9 @@ intents:
   - close_contact_p2p
   - close_contact_sms
 
+entities:
+  - people
+
 responses:
   utter_greet:
   - text: "Hey! Do you have any questions about COVID-19 quarantine guidelines?"

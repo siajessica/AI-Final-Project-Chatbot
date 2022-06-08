@@ -2,37 +2,25 @@ import pandas as pd
 import numpy as np
 
 import torch
-from transformers import BertForQuestionAnswering
-from transformers import BertTokenizer
+from transformers import LongformerTokenizer, LongformerForQuestionAnswering
+
+tokenizer = LongformerTokenizer.from_pretrained("allenai/longformer-large-4096-finetuned-triviaqa")
+model = LongformerForQuestionAnswering.from_pretrained("allenai/longformer-large-4096-finetuned-triviaqa")
 
 def question_answer(question, text):
-    model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
-    tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+    encoding = tokenizer(question, text, return_tensors="pt")
+    input_ids = encoding["input_ids"]
 
-    input_ids = tokenizer.encode(question, text) #tokenize question and text in ids as a pair
-    tokens = tokenizer.convert_ids_to_tokens(input_ids) #string version of tokenized ids
-    
-    sep_idx = input_ids.index(tokenizer.sep_token_id) #first occurence of [SEP] token
-    num_seg_a = sep_idx+1 #number of tokens in segment A - question
-    num_seg_b = len(input_ids) - num_seg_a #number of tokens in segment B - text
-    
-    segment_ids = [0]*num_seg_a + [1]*num_seg_b #list of 0s and 1s
-    assert len(segment_ids) == len(input_ids)
-    
-    output = model(torch.tensor([input_ids]), token_type_ids=torch.tensor([segment_ids])) #model output using input_ids and segment_ids
-    
-    #reconstructing the answer
-    answer_start = torch.argmax(output.start_logits)
-    answer_end = torch.argmax(output.end_logits)
+    attention_mask = encoding["attention_mask"]
 
-    if answer_end >= answer_start:
-        answer = tokens[answer_start]
-        for i in range(answer_start+1, answer_end+1):
-            if tokens[i][0:2] == "##":
-                answer += tokens[i][2:]
-            else:
-                answer += " " + tokens[i]
-                
+    outputs = model(input_ids, attention_mask=attention_mask)
+    start_logits = outputs.start_logits
+    end_logits = outputs.end_logits
+    all_tokens = tokenizer.convert_ids_to_tokens(input_ids[0].tolist())
+
+    answer_tokens = all_tokens[torch.argmax(start_logits) : torch.argmax(end_logits) + 1]
+    answer = tokenizer.decode(tokenizer.convert_tokens_to_ids(answer_tokens))
+       
     if answer.startswith("[CLS]"):
         answer = "Unable to find the answer to your question."
     

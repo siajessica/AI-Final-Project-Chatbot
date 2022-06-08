@@ -103,4 +103,10 @@ nlu:
 
 - intent: say_hello
   examples: |
-    - What are the symptops of covid?
+    - How many days a close contact has to quarantine for?
+
+- intent: covid_reports
+  examples: |
+    - How many COVID-19 cases are there in [New Taipei City](city)?
+    - What are the total cases of COVID-19 in [Taipei City](city)?
+    - show me 

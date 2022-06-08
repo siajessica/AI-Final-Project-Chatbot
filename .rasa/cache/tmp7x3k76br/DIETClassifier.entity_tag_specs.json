@@ -1,0 +1,28 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-city",
+      "2": "I-city",
+      "3": "L-city",
+      "4": "U-city",
+      "5": "B-people",
+      "6": "I-people",
+      "7": "L-people",
+      "8": "U-people",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-city": 1,
+      "I-city": 2,
+      "L-city": 3,
+      "U-city": 4,
+      "B-people": 5,
+      "I-people": 6,
+      "L-people": 7,
+      "U-people": 8,
+      "O": 0
+    },
+    "num_tags": 9
+  }
+]
